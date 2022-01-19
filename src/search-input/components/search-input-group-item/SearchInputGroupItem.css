@@ -1,0 +1,15 @@
+.SearchInputGroupItem .group-item-name {
+    margin: 5px 0;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    padding: 2px 5px;
+}
+
+.SearchInputGroupItem .group-item-name.active {
+    border: 1px solid rgba(255, 0, 0, 0.3);
+}
+
+.SearchInputGroupItem .group-item-name:focus {
+    outline: none;
+}

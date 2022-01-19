@@ -1,0 +1,7 @@
+.SearchInput {
+    position: relative;
+}
+
+.SearchInput input {
+    width: 100%;
+}

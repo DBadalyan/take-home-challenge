@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 function SelectedOutput({ selected = 'Nothing selected' }) {
   const selectedString = selected.toString();

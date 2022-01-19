@@ -1,15 +1,32 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Instructions from './Instructions';
-import Placeholder from './Placeholder';
-import Trigger from './Trigger';
+import SearchInput from './search-input/SearchInput';
 import SelectedOutput from './SelectedOutput';
+import Trigger from './Trigger';
+import { isEscKeyEvent, isOpenSearchKeyEvent } from './utils/keys.util';
 
 function App() {
   const [selected, setSelected] = useState();
+  const [displaySearchInput, setDisplaySearchInput] = useState(false);
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  });
 
   function handleTrigger() {
-    setSelected('No implementation; unhandled trigger');
+    setDisplaySearchInput(!displaySearchInput);
+  }
+
+  function handleKeyDown(e) {
+    
+    if (isOpenSearchKeyEvent(e)) {
+      e.preventDefault();
+      handleTrigger();
+    } else if (isEscKeyEvent(e)) {
+      setDisplaySearchInput(false);
+    }
   }
 
   return (
@@ -18,10 +35,9 @@ function App() {
       <div className="Implementation">
         <Trigger onTrigger={handleTrigger} />
 
-        {/* Replace the Placeholder component below with your implementation */}
-        <Placeholder replaceMe />
+        {displaySearchInput && <SearchInput onSelect={setSelected} />}
 
-        <SelectedOutput selected={selected}/>
+        <SelectedOutput selected={JSON.stringify(selected, null, '\t')}/>
       </div>
     </div>
   );
